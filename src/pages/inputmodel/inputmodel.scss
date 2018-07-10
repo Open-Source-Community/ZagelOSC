@@ -1,0 +1,44 @@
+page-inputmodel {
+    .myModal {
+        background-color: cornflowerblue !important;
+        color: Black;
+        position: absolute !important;
+        width: 300px !important;
+        height: 300px !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin: auto !important;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 10px !important;
+        border-color: black;
+        overflow: hidden !important;
+        }
+
+        #myInput {
+          
+            border: 1px solid black;
+            height: 80px;
+            border-radius: 0;
+            margin-bottom: 30px;
+        }
+        textarea{
+            height: 95px;
+            margin:  auto; 
+            width: 100%;
+        }
+        .emojis li{
+            list-style: none; 
+            float: left;
+            margin-right: 12px; 
+            border: 1px solid #444; 
+            border-radius: 50%; 
+        }
+        .emojis ul{
+            list-style: none; 
+        }
+        .emojis{
+        }
+}

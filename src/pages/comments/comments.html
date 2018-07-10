@@ -1,0 +1,35 @@
+
+<ion-header>
+
+  <ion-navbar>
+      <ion-buttons right>
+          <button (click)="cancel()" ion-button> close</button>
+        </ion-buttons>
+    <ion-title>comments</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-fab right bottom>
+        <button (click)="addComment()" ion-fab color="secondary"><ion-icon name="add"></ion-icon></button>
+   
+      </ion-fab>
+<div *ngFor="let comment of comments" class="comment">
+  <div>
+    <img src="https://openclipart.org/download/57877/penguin.svg" alt="Avatar" style="width:30px; height: 50px;">
+  </div>
+
+  <div class="nested">
+  <div class="user">
+   {{comment.user.name}}
+  </div>
+  
+  <div [innerHTML]="comment.content" class="content">
+  <img src="../../assets/imgs/happy.png" width="10px" height="10px">
+  </div>
+</div>
+</div>
+
+</ion-content>

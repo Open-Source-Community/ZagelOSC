@@ -1,0 +1,41 @@
+page-about {
+    .centered-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .wrapper{
+
+        color: #444; 
+    
+    }
+    .images{
+        margin-top: 15px; 
+        column-count: 2; 
+    }
+    .one-image{
+        margin:1px;  
+    }
+    img{
+        transition: transform .2s;
+    }
+    .text-section{
+        font-family:  "Questrial"; 
+    }
+    .text-section h1{
+        text-align: center; 
+        font-family: 'Gloria Hallelujah' ;
+
+    }
+    .text-section p{
+        font-size: 18px;
+        text-align: justify; 
+        width: 80%; 
+        margin: auto;    
+        margin-bottom: 20px;
+        padding: 0.4em;
+        border-bottom: 1px #444 solid;      
+        font-weight: 900;
+    }
+
+}

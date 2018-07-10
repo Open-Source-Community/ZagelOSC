@@ -1,0 +1,39 @@
+<!--
+  Generated template for the InputmodelPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div class="myModal">
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons >
+      <button (click)="dismiss()" ion-button> close</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  
+
+  <form>
+        <!-- <ion-textarea required [(ngModel)]="post" #postref="ngModel" name="postdata" id="myInput"></ion-textarea> -->
+        <textarea placeholder="Add your text here" #postref="ngModel" [(ngModel)]="post" name="textaread"></textarea>
+        <div class="emojis">
+          <ul>
+            <li><img (click)="addEmoji('hai')" src="assets/imgs/hai.png" height="30px" width="30px" alt=""></li>
+            <li><img (click)="addEmoji('coding')" src="assets/imgs/coding.png" height="30px" width="30px" alt=""></li>
+            <li><img (click)="addEmoji('happy')" src="assets/imgs/happy.png" height="30px" width="30px" alt=""></li>
+            <li><img (click)="addEmoji('cool')" src="assets/imgs/cool.png" height="30px" width="30px" alt=""></li>
+          </ul>
+        </div>
+<br>
+        <button [disabled]="!postref.valid" style="margin-top: 30px;" (click)="addpost()"  ion-button full text-uppercase>{{title}}</button>
+</form>
+
+
+  </ion-content>
+</div>

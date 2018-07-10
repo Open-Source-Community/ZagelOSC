@@ -1,0 +1,39 @@
+page-comments {
+
+// .comment{
+//     width: 88%; 
+//     margin: 0px auto 15px auto; 
+//     border-bottom: 1px black solid;
+//     display: inline-block;
+
+    
+// }
+// .user{
+//     font-size: 18px; 
+//     font-weight: bold;
+//     display: inline-block;
+// }
+// .avatar
+// {
+//     display: inline-block;
+// }
+ img
+{
+    border-radius: 50%;
+}
+.comment{
+    display: grid; 
+    grid-template-columns: 20% 80%; 
+    grid-column-gap: 0em;
+    margin-bottom: 30px;
+    max-height: 70%;
+}
+.nested{
+    border-bottom: 1px solid #444; 
+}
+.user
+{
+    font-weight: bold; 
+    font-size: 1.2em; 
+}
+}

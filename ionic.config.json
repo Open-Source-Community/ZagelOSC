@@ -1,0 +1,14 @@
+{
+  "name": "OSCzagel",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  },
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://zagel.oscgeeks.org/api"
+    }
+  ],
+  "app_id": "c52d0594"
+}

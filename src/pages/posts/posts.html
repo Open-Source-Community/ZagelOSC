@@ -1,0 +1,64 @@
+
+
+<ion-content [ngStyle]="{'background-color': coloring}" padding>
+
+    
+
+    <div class="wrapper">
+
+        <button ion-button (click)="changeColor()">  <ion-icon name="color-fill"></ion-icon>
+        </button>
+        
+        <ion-fab style="position: fixed;"  right top>
+            <button (click)="addPost()" ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+       
+          </ion-fab>
+          <div *ngIf="showSpin == true" class="container">
+            <div class="center">
+          <ion-spinner  name="circles"></ion-spinner>
+        </div>
+        </div>
+        
+          <!-- THIS IS FOR THE REFRESHER, MANUAL REFRESHER.-->
+        <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
+                <ion-refresher-content>
+        </ion-refresher-content>
+        </ion-refresher>
+             -->
+      
+   <ion-card *ngFor="let post of _Posts">
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="assets/imgs/osc.png">
+        </ion-avatar>
+        <h2 style="font-weight: bold; ">{{post.user.name}}</h2>
+        <p>{{post.created_at.date}}</p>
+      </ion-item>
+    
+      <hr>
+      <!-- <img src="assets/imgs/cam.jpg"> -->
+    
+      <ion-card-content>
+      <p [innerHTML]="post.content"></p>     
+ </ion-card-content>
+    
+      <ion-row>
+        <ion-col>
+          <button (click)="addComment(post.id)" ion-button icon-left clear small>
+            <ion-icon name="happy"></ion-icon>
+            <div>Add Comment</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button (click)="presentComments(post.id)" ion-button icon-left clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>Comments</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    
+    </ion-card>
+        </div>
+
+</ion-content>

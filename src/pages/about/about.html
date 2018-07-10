@@ -1,0 +1,34 @@
+
+
+<ion-content  [ngStyle]="{'background-color':  'rgb(22, 221, 175)'}">         
+
+<div class="wrapper">
+  <div class="text-section"> 
+    <h1>
+        <b>Zagel</b><i>OSC</i>
+        <img src="assets/imgs/osc.png" alt="logo." width="100px" height="100px">
+     </h1> 
+      <p>This is <span style="font-family: 'Gloria Hallelujah';"> ZagelOSC</span>, we have created This
+    small application using <span style="font-weight: bold"> Ionic</span>   <ion-icon name="ionic"></ion-icon>
+     and <span style="font-weight: bold"> Laravel</span>  <ion-icon name="code-working"></ion-icon>.
+  </p>
+   <img class="centered-image" src="assets/imgs/happy.png" width="130px" height="130px">
+  
+  <p>This application shall be used to allow people to post/comment and communicate with other OSCians.
+      <img src="assets/imgs/coding.png" width="90px" height="45px">
+    
+  </p>
+  <p>We need your support here, contribute with us on <a href="https://gitlab.com/oscgeeks/zagelOSC">Gitlab's Repo</a> </p>
+  <p>As a start you can simply add new photos to our gallery below,maybe style this Bad page.
+      <img src="assets/imgs/hai.png" width="100px" height="150px">    
+  </p>
+
+</div>
+  <div class="images">
+    <div  *ngFor="let image of [1,2,3,4,5,6,7,8,9]" 
+    class="one-image">
+    <img src="assets/imgs/{{image}}.jpg" imageViewer >
+    </div>
+  </div>
+</div>
+</ion-content>
