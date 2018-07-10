@@ -1,5 +1,5 @@
 {
-  "name": "OSCzagel",
+  "name": "zagelosc",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
@@ -10,5 +10,5 @@
       "proxyUrl": "http://zagel.oscgeeks.org/api"
     }
   ],
-  "app_id": "c52d0594"
+  "app_id": "6c12fffb"
 }
