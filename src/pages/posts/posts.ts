@@ -68,14 +68,8 @@ export class PostsPage {
   {
     // here i make another http get cause its not implemented yet to retrieve the comments given the post ID.
     console.log("id sent to comments page" , id); 
-    this.rest.getPostSub(id).subscribe((post)=>{
-      console.log(post);
-      this.modalCtrl.create("CommentsPage" , {"comments" 
-      : post["data"]["comments"]  ,
+    this.modalCtrl.create("CommentsPage" , {
     "postID" : id}).present();
-      console.log("pressed");
-    })    
-
   }
 
       // showing a prompt user input box to add a new post.

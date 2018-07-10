@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams  , ViewController} from 'ionic-angular';
 import {ElementRef} from '@angular/core';
+import { EmoteProvider } from '../../providers/emote/emote';
 
 /**
  * Generated class for the InputmodelPage page.
@@ -18,9 +19,11 @@ export class InputmodelPage {
 
   post : string; 
   title : string; 
-  constructor(public element:ElementRef,
-     public viewCtrl : ViewController,
-     public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+      public emote : EmoteProvider, 
+      public element:ElementRef,
+      public viewCtrl : ViewController,
+      public navCtrl: NavController, public navParams: NavParams) {
 
       this.title=navParams.get("title");
       this.post=""; 
@@ -50,5 +53,9 @@ export class InputmodelPage {
     else{
       this.post+="--" + emoji + "--";
     }
+  }
+  showEmotes()
+  {
+    this.post=this.emote.addEmotes(this.post);
   }
 }
