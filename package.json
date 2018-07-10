@@ -59,9 +59,9 @@
         "APP_ID": "6c12fffb",
         "CHANNEL_NAME": "Production",
         "UPDATE_METHOD": "background",
-        "WARN_DEBUG": "true",
+        "WARN_DEBUG": "false",
         "UPDATE_API": "https://api.ionicjs.com",
-        "MAX_STORE": "2"
+        "MAX_STORE": "0"
       }
     },
     "platforms": [
