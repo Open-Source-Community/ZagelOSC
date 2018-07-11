@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 import { RestfulProvider } from '../../providers/restful/restful';
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
+import { ViewController } from 'ionic-angular/navigation/view-controller';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -15,6 +17,7 @@ export class ContactPage {
   maxLen : number; 
   currentLen : number; 
   constructor(
+    public viewCtr : ViewController,
     public toastCtr : ToastController, 
     public rest : RestfulProvider, 
     public navCtrl: NavController
@@ -43,5 +46,10 @@ export class ContactPage {
       infiniteScroll.complete();
     }, 500);
 
+  }
+  logout(){
+    localStorage.clear(); 
+    this.navCtrl.push(LoginPage);
+    this.viewCtr.dismiss(); 
   }
 }

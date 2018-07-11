@@ -22,6 +22,7 @@ export class PostsPage {
   numberTest:any; 
   _lastID : number; 
   coloring : string; 
+  _LocalID : string; 
   showSpin = true; 
   constructor(
     public localnotifications : LocalNotifications,
@@ -31,6 +32,8 @@ export class PostsPage {
     public rest : RestfulProvider, 
     public navCtrl: NavController,
     public modalCtrl: ModalController) {
+
+      this._LocalID = localStorage.getItem("ID"); 
 
       if (localStorage.getItem("Color")){
         this.coloring= localStorage.getItem("Color"); 
@@ -82,7 +85,7 @@ export class PostsPage {
      // PLEASE CHANGE THE RANDOM MATH VALUES WITH REAL USER IDS  ** IMPORTANT ** 
       // do stuff with the post 
       // add a new post over here
-      this.rest.addPost((Math.ceil(Math.random()*15)).toString()
+      this.rest.addPost(this._LocalID
        , data);
       //this._Posts.unshift(createPost(data)); 
       // make a http post
@@ -104,7 +107,7 @@ export class PostsPage {
     modal.present(); 
     modal.onDidDismiss((comment)=>{
       // add a http post method to update the post given its id
-      this.rest.addComment(comment , (Math.ceil(Math.random()*15)).toString() , id).subscribe(_ =>{
+      this.rest.addComment(comment , this._LocalID , id).subscribe(_ =>{
 
         this.toastCtrl.create({message: "Comment added" , duration: 800}).present(); 
       }); 

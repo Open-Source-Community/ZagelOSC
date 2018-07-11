@@ -32,13 +32,19 @@
               <!-- <ion-label no-margin *ngIf="!isPasswordValid">{{data.errorPassword}}</ion-label> -->
             </ion-item>
             <ion-item no-padding>
+              <ion-input #cpassword="ngModel" required minlength="5" name="cpassword" [(ngModel)]="_User.c_password"
+               placeholder="Retype Password " type="password"></ion-input>
+              <!-- <ion-label no-margin *ngIf="!isPasswordValid">{{data.errorPassword}}</ion-label> -->
+            </ion-item>
+            <ion-item no-padding>
               <ion-input #name="ngModel" required name="name" [(ngModel)]="_User.name" placeholder="Name" type="text"></ion-input>
               <!-- <ion-label no-margin *ngIf="!isPasswordValid">{{data.errorPassword}}</ion-label> -->
             </ion-item>
+            
           </div>
           <!-- Login button -->
           <ion-col col-12 no-padding>
-            <button [disabled]="!email.valid || !password.valid || !name.valid" no-margin ion-button full text-uppercase (click)="login()">Sign Up</button>
+            <button [disabled]="!email.valid || !password.valid || !name.valid" no-margin ion-button full text-uppercase (click)="register()">Register</button>
           </ion-col>
           <!-- Description -->
           <div description text-center>

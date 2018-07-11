@@ -46,7 +46,7 @@ export class CommentsPage {
     modal.onDidDismiss((data)=>{
       console.log(data); 
       this.rest.addComment(data , 
-        (Math.ceil(Math.random()*20)).toString(), 
+        localStorage.getItem("ID"), 
         this.postID).subscribe(_ => this.showComments()); 
     })
   }
