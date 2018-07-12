@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, LOCALE_ID } from '@angular/core';
 import { NavController, ToastController ,IonicPage } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { Comment } from '../../models/Post';
@@ -34,6 +34,7 @@ export class PostsPage {
     public modalCtrl: ModalController) {
 
       this._LocalID = localStorage.getItem("ID"); 
+      console.log("Local ID" , this._LocalID); 
 
       if (localStorage.getItem("Color")){
         this.coloring= localStorage.getItem("Color"); 
@@ -65,6 +66,10 @@ export class PostsPage {
 
 
   }
+  ionViewDidEnter(){
+    if (localStorage.getItem("Color"))
+    this.coloring = localStorage.getItem("Color"); 
+    }
 
       // creating a model when a post is clicked by sending to that modal the comments to be displayed.
   presentComments(id)
@@ -92,15 +97,7 @@ export class PostsPage {
     })
   }
   // add a comment to a post given its id
-  changeColor()
-  {
-    let modal  =this.modalCtrl.create("ColorpickerPage"); 
-    modal.present(); 
-    modal.onDidDismiss((color)=>{
-      localStorage.setItem("Color" , color); 
-      this.coloring = color; 
-    })
-  }
+
   addComment(id)
   {
     let modal = this.modalCtrl.create(InputmodelPage , {title : "Add Comment"});

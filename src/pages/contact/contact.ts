@@ -47,9 +47,5 @@ export class ContactPage {
     }, 500);
 
   }
-  logout(){
-    localStorage.clear(); 
-    this.navCtrl.push(LoginPage);
-    this.viewCtr.dismiss(); 
-  }
+ 
 }

@@ -60,7 +60,7 @@ export class LoginPage {
         localStorage.setItem("Name" , data["success"]["name"]);
       });
 
-
+       
       setTimeout(() => {
       this.navCtrl.push("TabsPage");
       this.viewCtr.dismiss(); 

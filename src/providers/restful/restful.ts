@@ -85,7 +85,7 @@ export class RestfulProvider {
     let h = new HttpHeaders({
       'Authorization' : 'Bearer ' + token
     });
-    return this.http.post(`${this._apiLink}/get-details` , { },  {headers: h});
+    return this.http.get(`${this._apiLink}/get-details` ,  {headers: h});
   }
 
 
