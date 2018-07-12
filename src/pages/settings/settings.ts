@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, App, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, App, ToastController, AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import {Pro} from '@ionic/pro';
 /**
@@ -21,6 +21,7 @@ export class SettingsPage {
   public downloadProgress = 0;
   coloring : string; 
   constructor(
+    public alertCtrl: AlertController,
     public toastCtrl : ToastController,
     public app : App,
     public modalCtrl : ModalController, 
@@ -69,11 +70,44 @@ export class SettingsPage {
         but Redirect when they logout for an app that is always running
         but used with multiple users (like at a doctors office).
     */
+   try {
+    const haveUpdate = await Pro.deploy.check();
 
-    try {
-      const haveUpdate = await Pro.deploy.check();
+    if (haveUpdate){
+   let alert = this.alertCtrl.create({
+    title: 'Confirm Update',
+    message: 'there is a new update, wanna go forward?',
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+        }
+      },
+      {
+        text: 'Update',
+        handler: () => {
+          this.manualUpdate(); 
+        }
+      }
+    ]
+  });
+  alert.present();
+    }
+    else {
+      this.toastCtrl.create({
+        message: "No updates found bud", 
+        duration: 2000 ,
+      }).present(); 
+    }
+  }
+  catch(err){
 
-      if (haveUpdate){
+  }
+  }
+
+  async manualUpdate(){
+          
         this.downloadProgress = 0;
 
         await Pro.deploy.download((progress) => {
@@ -91,19 +125,5 @@ export class SettingsPage {
            })
          });
       }
-      else {
-        this.toastCtrl.create({
-          message: "No updates found bud", 
-          duration: 2000 ,
-        }).present(); 
-      }
-    } catch (err) {
-      // We encountered an error.
-      // Here's how we would log it to Ionic Pro Monitoring while also catching:
-
-      // Pro.monitoring.exception(err);
-    }
-
-  }
 
 }
