@@ -17,23 +17,33 @@ page-comments {
 // {
 //     display: inline-block;
 // }
- img
-{
-    border-radius: 50%;
+// THESE FOR THE COMMENTED FIRST TRY, REMMEBER...
+//  img
+// {
+//     border-radius: 50%;
+// }
+// .comment{
+//     display: grid; 
+//     grid-template-columns: 20% 80%; 
+//     grid-column-gap: 0em;
+//     margin-bottom: 30px;
+//     max-height: 70%;
+// }
+// .nested{
+//     border-bottom: 1px solid #444; 
+// }
+// .user
+// {
+//     font-weight: bold; 
+//     font-size: 1.2em; 
+// }
+ion-note {
+    font-size: 12px;
+    align-self: flex-start;
+    margin-top: 14px;
+  }
+pre{
+    font-size: 1em;
 }
-.comment{
-    display: grid; 
-    grid-template-columns: 20% 80%; 
-    grid-column-gap: 0em;
-    margin-bottom: 30px;
-    max-height: 70%;
-}
-.nested{
-    border-bottom: 1px solid #444; 
-}
-.user
-{
-    font-weight: bold; 
-    font-size: 1.2em; 
-}
+
 }

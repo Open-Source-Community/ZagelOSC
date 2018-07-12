@@ -16,6 +16,7 @@ export class CommentsPage {
 
   comments : any; 
   postID : any; 
+  coloring = "rgb(22, 221, 175)";
   constructor(
       public emote : EmoteProvider, 
       public rest : RestfulProvider,
@@ -26,12 +27,15 @@ export class CommentsPage {
    
     this.showComments();
     this.postID = navParams.get("postID"); 
+    if (localStorage.getItem("Color"))
+    {
+      this.coloring = localStorage.getItem("Color"); 
+    }
 
 
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CommentsPage');
   }
   cancel()
   {
@@ -69,6 +73,10 @@ showComments()
     }
   }); 
 
+}
+fixDates(str){
+  const date = str.split('.')[0];
+  return date.split(" ")[1];  
 }
 
 }

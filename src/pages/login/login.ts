@@ -28,14 +28,7 @@ export class LoginPage {
     }
 
     ionViewDidLoad() {
-      setTimeout(() => {
-        this.splash = false;
-        if (localStorage.getItem("ID") && localStorage.getItem("token"))
-        {
-          this.navCtrl.push("TabsPage"); 
-          this.viewCtr.dismiss(); 
-        }
-      }, 4000);
+  
     }
   
 
