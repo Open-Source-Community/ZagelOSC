@@ -13,7 +13,8 @@ export class RestfulProvider {
   _User = {} as User; 
   _apiLink : string; 
   _DummieLink : string;  // dummie link for testing purposes.
-  constructor(public toastCtrl : ToastController , 
+  constructor(
+     public toastCtrl : ToastController , 
      public http: HttpClient) {
     console.log('Hello RestfulProvider Provider');
 

@@ -3,7 +3,6 @@ import { NavController, ToastController } from 'ionic-angular';
 import { RestfulProvider } from '../../providers/restful/restful';
 import { IonicPage } from 'ionic-angular/navigation/ionic-page';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
-import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -16,6 +15,7 @@ export class ContactPage {
   DisplayNames : any; 
   maxLen : number; 
   currentLen : number; 
+  coloring = "rgb(22, 221, 175)";
   constructor(
     public viewCtr : ViewController,
     public toastCtr : ToastController, 
@@ -30,6 +30,11 @@ export class ContactPage {
       this.DisplayNames = this._allNames.slice(0,10); 
     })
   }
+  ionViewDidEnter(){
+    if (localStorage.getItem("Color"))
+    this.coloring = localStorage.getItem("Color"); 
+    }
+
   doInfinite(infiniteScroll){
     setTimeout(() => {
       let tempCount = this.currentLen; 

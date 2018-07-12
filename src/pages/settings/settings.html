@@ -1,24 +1,43 @@
-<!--
-  Generated template for the SettingsPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<!-- <ion-header>
+<ion-header>
 
   <ion-navbar>
-    <ion-title>settings</ion-title>
+    <ion-title text-center>settings <ion-icon name="settings"></ion-icon></ion-title>
   </ion-navbar>
 
-</ion-header> -->
+</ion-header>
 
 
 <ion-content [ngStyle]="{'background-color': coloring}" padding>
+  <ion-list >
 
-  <button ion-button (click)="changeColor()">  <ion-icon name="color-fill"></ion-icon>
-  </button>
 
-  <button ion-button block (click)="logout()" >Log Out</button>
+    <button ion-item (click)="changeColor()">
+      
+      <ion-icon color="primary" name='color-fill' item-start></ion-icon>
+      Change Color
+    </button>
+
+    <button ion-item (click)="logout()">
+      <ion-icon name="exit" item-start></ion-icon>
+      <ion-label>
+        Log Out 
+      </ion-label>
+    </button>
+
+    
+    <!-- <button ion-item>
+        <ion-toggle checked="false"></ion-toggle>
+      <ion-icon name='flask' item-start></ion-icon>
+      <ion-label>
+          Toggle Updates
+       </ion-label>
+
+    </button> -->
+
+
+
+  </ion-list>
 
   
 </ion-content>

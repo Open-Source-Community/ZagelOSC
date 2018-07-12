@@ -1,5 +1,5 @@
  
-  <ion-content padding>
+  <ion-content  [ngStyle]="{'background-color': coloring}" padding>
 
     <ion-list>
       <ion-item *ngFor="let user of DisplayNames">{{user.name}}</ion-item>

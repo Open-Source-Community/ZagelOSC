@@ -39,8 +39,10 @@ export class SettingsPage {
     let modal  =this.modalCtrl.create("ColorpickerPage"); 
     modal.present(); 
     modal.onDidDismiss((color)=>{
+      if(color){
       localStorage.setItem("Color" , color); 
       this.coloring = color; 
+      }
     })
   }
 

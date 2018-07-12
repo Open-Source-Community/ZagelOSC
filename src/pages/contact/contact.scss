@@ -1,7 +1,5 @@
 page-contact {
-    ion-content {
-        background-color: $background_global !important;
-    }
+  
     @mixin calc($property, $expression) {
         #{$property}: -webkit-calc(#{$expression});
         #{$property}:    -moz-calc(#{$expression});
