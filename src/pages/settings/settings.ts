@@ -125,5 +125,11 @@ export class SettingsPage {
            })
          });
       }
+      checkVersion(){
+        this.toastCtrl.create({
+          message : "Version number 1.0.0",
+          duration : 1900,
+        }).present(); 
+      }
 
 }
