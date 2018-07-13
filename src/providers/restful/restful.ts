@@ -28,18 +28,27 @@ export class RestfulProvider {
   // get all posts the subscribing version.
  public getAllPostsSub()
   {
-    return this.http.get(`${this._apiLink}/posts`);
+    let h = new HttpHeaders({
+      'Authorization' : 'Bearer ' + localStorage.getItem("token")
+    });
+    return this.http.get(`${this._apiLink}/posts` , {headers : h});
   }
   public getPostSub(id)
   {
-    return this.http.get(`${this._apiLink}/posts/${id}`)
+    let h = new HttpHeaders({
+      'Authorization' : 'Bearer ' + localStorage.getItem("token")
+    });
+    return this.http.get(`${this._apiLink}/posts/${id}` , {headers : h})
   }
 
 
   getAllPosts()
   {
+    let h = new HttpHeaders({
+      'Authorization' : 'Bearer ' + localStorage.getItem("token")
+    });
     return new Promise((resolve , reject) => {
-      this.http.get(`${this._apiLink}/posts`).toPromise().then((data)=>{
+      this.http.get(`${this._apiLink}/posts` , {headers : h}).toPromise().then((data)=>{
         resolve(data); 
       }).catch((err)=>{
         reject(err); 
@@ -48,8 +57,11 @@ export class RestfulProvider {
   }
   getPost(id){
     try{
+      let h = new HttpHeaders({
+        'Authorization' : 'Bearer ' + localStorage.getItem("token")
+      });
     return new Promise((resolve, reject)=>{
-      this.http.get(`${this._apiLink}/post/${id}`).toPromise().then((post)=>{
+      this.http.get(`${this._apiLink}/post/${id}` , {headers : h}).toPromise().then((post)=>{
         resolve(post); 
       }).catch((err) => reject(err))
     })
@@ -61,19 +73,25 @@ export class RestfulProvider {
   // adding a new post given a user id and a content.
   addPost(id : string , content : string) 
   {
+    let h = new HttpHeaders({
+      'Authorization' : 'Bearer ' + localStorage.getItem("token")
+    });
     this.http.post(`${this._apiLink}/posts` , {	
     "content": content,
-    "user_id": id,}).subscribe(d => console.log(d) , e => console.log(e));
+    "user_id": id} , {headers : h}).subscribe(d => console.log(d) , e => console.log(e));
   }
 
   // add a comment to a given post ID
   addComment(content : string , userID : string , postID : string)
   {
+    let h = new HttpHeaders({
+      'Authorization' : 'Bearer ' + localStorage.getItem("token")
+    });
    return this.http.post(`${this._apiLink}/comments` , {
       "content": content,
       "user_id": userID,
       "post_id": postID
-    })
+    } , {headers : h})
   }
 
 

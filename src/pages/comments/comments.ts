@@ -64,7 +64,7 @@ showComments()
     temp_comments  = post["data"]["comments"]; 
     this.comments = [];
     var size = Object.keys(temp_comments).length; 
-    for (var i =size-1; i>=0; i--){
+    for (var i =0; i<size; i++){
      
       temp_comments[i]["content"] = this.emote.addEmotes(temp_comments[i]["content"]); 
       this.comments.push(temp_comments[i]); 
@@ -76,5 +76,12 @@ fixDates(str){
   const date = str.split('.')[0];
   return date.split(" ")[1];  
 }
+doRefresh(refresher) {
 
+
+  setTimeout(() => {
+    this.showComments();
+    refresher.complete();
+  }, 800);
+}
 }

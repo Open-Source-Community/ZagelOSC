@@ -27,14 +27,8 @@ export class SplashPage {
       
       if (localStorage.getItem("ID") && localStorage.getItem("token"))
       {
-       this.rest.getDetails(localStorage.getItem("token")).subscribe((d)=>{
         this.navCtrl.push("TabsPage"); 
         this.viewCtrl.dismiss(); 
-       } , (err) =>{
-         this.navCtrl.push(LoginPage); 
-         this.viewCtrl.dismiss(); 
-       })
-     
       }
       else{
         this.navCtrl.push(LoginPage); 

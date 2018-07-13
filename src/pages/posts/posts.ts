@@ -52,7 +52,7 @@ export class PostsPage {
 
       setInterval(() => {
         this.Refresher(); 
-      }, 3000);
+      }, 4400);
 
       rest.getAllPostsSub()
         .subscribe((data) =>{
@@ -145,8 +145,9 @@ export class PostsPage {
 
 
     setTimeout(() => {
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
       refresher.complete();
-    }, 2000);
+    }, 200);
   }
   doInfinite(infiniteScroll){
     setTimeout(() => {
