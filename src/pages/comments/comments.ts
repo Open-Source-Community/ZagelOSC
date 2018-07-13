@@ -48,7 +48,6 @@ export class CommentsPage {
     modal.present(); 
     modal.onDidDismiss((data)=>{
       this.rest.addComment(data , 
-        localStorage.getItem("ID"), 
         this.postID).subscribe(_ => this.showComments()); 
     })
   }

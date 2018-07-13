@@ -8,7 +8,7 @@ import { InputmodelPage } from '../inputmodel/inputmodel';
 import { EmoteProvider } from '../../providers/emote/emote';
 
 import {LocalNotifications} from '@ionic-native/local-notifications'
-import { _ParseAST } from '@angular/compiler';
+import { Platform } from 'ionic-angular/platform/platform';
 
 
 @IonicPage()
@@ -26,8 +26,11 @@ export class PostsPage {
   coloring : string; 
   _LocalID : string; 
   _loaded : boolean; 
+  _pageNum = 1; 
+  _postsPageNum=2; // as we ask for 1 at the start.
   showSpin = true; 
   constructor(
+    public platform : Platform,
     public localnotifications : LocalNotifications,
     public emote : EmoteProvider, 
     public toastCtrl : ToastController,
@@ -35,6 +38,14 @@ export class PostsPage {
     public rest : RestfulProvider, 
     public navCtrl: NavController,
     public modalCtrl: ModalController) {
+
+      platform.ready().then(_ =>{
+        localnotifications.on("click").subscribe((d)=>{
+          this.modalCtrl.create("CommentsPage" , {
+            "postID" : d.id}).present();
+        });
+        
+      })
 
       this._loaded = true; 
 
@@ -52,7 +63,8 @@ export class PostsPage {
 
       setInterval(() => {
         this.Refresher(); 
-      }, 4400);
+        this.gatherNotifications(); 
+      }, 5000);
 
       rest.getAllPostsSub()
         .subscribe((data) =>{
@@ -92,6 +104,7 @@ export class PostsPage {
       // showing a prompt user input box to add a new post.
   addPost()
   {
+ 
     let modal = this.modalCtrl.create(InputmodelPage , {title : "Add Post"});
     modal.present(); 
     modal.onDidDismiss((data)=>{
@@ -99,8 +112,7 @@ export class PostsPage {
      // PLEASE CHANGE THE RANDOM MATH VALUES WITH REAL USER IDS  ** IMPORTANT ** 
       // do stuff with the post 
       // add a new post over here
-      this.rest.addPost(this._LocalID
-       , data);
+      this.rest.addPost(data);
       //this._Posts.unshift(createPost(data)); 
       // make a http post
     })
@@ -113,7 +125,7 @@ export class PostsPage {
     modal.present(); 
     modal.onDidDismiss((comment)=>{
       // add a http post method to update the post given its id
-      this.rest.addComment(comment , this._LocalID , id).subscribe(_ =>{
+      this.rest.addComment(comment , id).subscribe(_ =>{
 
         this.toastCtrl.create({message: "Comment added" , duration: 800}).present(); 
       }); 
@@ -121,15 +133,23 @@ export class PostsPage {
   }
   Refresher()
   {
+    
+
     this.rest.getPostSub(this._lastID+1).subscribe((post) =>{
 
       // notify when a post is added and the userID is not equal to the logged one now, add an if condition here
       //** CODE THE CONDITION **//
       if (post["data"]["user"]["id"] != localStorage.getItem("ID")){
-      this.localnotifications.schedule({
-        id: 1,
-        text: 'A new Post has been added:)',
-      });
+      // this.localnotifications.schedule({
+      //   id: 5,
+      //   text: 'A new Post has been added:)',
+
+      // });
+      this.localnotifications.schedule([
+        { id: 1,  group : "email" , text : "idk"  },
+
+    ]);
+      
     }
       
       post["data"]["content"] = this.emote.addEmotes(post["data"]["content"]); 
@@ -137,7 +157,8 @@ export class PostsPage {
       this._lastID+=1; 
     }, (err)=>{
 
-    })
+    });
+    
   }
 
   // a manual refresher by the user.
@@ -150,20 +171,21 @@ export class PostsPage {
     }, 200);
   }
   doInfinite(infiniteScroll){
+    
+   
     setTimeout(() => {
-      for(var i=1; i<=5; i++){
-        this.rest.getPostSub(this._firstID-i).subscribe((post)=>{
-          post["data"]["content"]= this.emote.addEmotes(post["data"]["content"]);
-          this._firstID--; 
-          this._Posts.push(post["data"]);
-        } , (err => {
-          i =7; 
-          if (err["status"] == 429 || err["status"] == "429"){
-          }
-          else
-          this.toastCtrl.create({message : "No more to show" , duration : 2000}).present(); 
-        }))
-      }
+      this.rest.getPostPage(this._postsPageNum).subscribe((data)=>{
+        let posts = data["data"]; 
+        for (var i=0; i<Object.keys(posts).length; i++){
+          posts[i]["content"] = this.emote.addEmotes(posts[i]["content"]); 
+        }
+        for (var i=0; i<Object.keys(posts).length; i++){
+          this._Posts.push(posts[i]); 
+        }
+      }, (err)=>{console.log(err);
+        this.toastCtrl.create({message : "List of posts finished" , duration :1500}).present();
+        })
+        this._postsPageNum++ ; 
       infiniteScroll.complete();
     }, 500);
   }
@@ -175,5 +197,50 @@ export class PostsPage {
   }
   addCommentsNumber(post){
     return  Object.keys(post["comments"]).length;
+  }
+
+  gatherNotifications(){
+this.rest.getNotified(this._pageNum).subscribe((data) =>{
+  console.log(data); 
+  let done_read = false; 
+  let collected_notifiers = new Set;
+  let notifarr = data["notifications"]["data"];
+  console.log("notifier array" , notifarr);
+  let size  = Object.keys(notifarr).length; 
+  console.log("size " , size); 
+  for (var i =0; i<size; i++)
+  {
+    if(notifarr[i]["read_at"]){   
+      console.log("read at",notifarr[i]["read_at"])                                         //|| notifarr[i]["read_at"]===null){
+      done_read = true; 
+      console.log("break at" , i);
+      break; 
+    }
+    else{
+      collected_notifiers.add(notifarr[i]["data"]["post_id"]);
+    }
+  }
+  console.log(collected_notifiers); 
+  if ( done_read==false){
+    this._pageNum++; 
+  }
+  else
+  {
+    this._pageNum = 1; 
+  }
+  if (collected_notifiers.size<1){
+    return; 
+  }
+
+  for (var it = collected_notifiers.values(), val= null; val=it.next().value; ) {
+    this.localnotifications.schedule({
+      id : val , 
+      text : "Someone Commented on a post you participated in", 
+      title : "Woot, comments are here"
+    })
+}
+  this.rest.readNotifications().subscribe((d)=>{ }); 
+})
+    
   }
 }

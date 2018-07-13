@@ -31,7 +31,7 @@ export class RestfulProvider {
     let h = new HttpHeaders({
       'Authorization' : 'Bearer ' + localStorage.getItem("token")
     });
-    return this.http.get(`${this._apiLink}/posts` , {headers : h});
+    return this.http.get(`${this._apiLink}/posts?page=1` , {headers : h});
   }
   public getPostSub(id)
   {
@@ -41,7 +41,12 @@ export class RestfulProvider {
     return this.http.get(`${this._apiLink}/posts/${id}` , {headers : h})
   }
 
-
+  getPostPage(id){
+    let h = new HttpHeaders({
+      'Authorization' : 'Bearer ' + localStorage.getItem("token")
+    });
+    return this.http.get(`${this._apiLink}/posts?page=${id}` , {headers : h})
+  }
   getAllPosts()
   {
     let h = new HttpHeaders({
@@ -71,28 +76,28 @@ export class RestfulProvider {
   }
   }
   // adding a new post given a user id and a content.
-  addPost(id : string , content : string) 
+  addPost(content : string) 
   {
     let h = new HttpHeaders({
       'Authorization' : 'Bearer ' + localStorage.getItem("token")
     });
     this.http.post(`${this._apiLink}/posts` , {	
     "content": content,
-    "user_id": id} , {headers : h}).subscribe(d => console.log(d) , e => console.log(e));
+   } , {headers : h}).subscribe(d => console.log(d) , e => console.log(e));
   }
 
   // add a comment to a given post ID
-  addComment(content : string , userID : string , postID : string)
+  addComment(content : string  , postID : string)
   {
     let h = new HttpHeaders({
       'Authorization' : 'Bearer ' + localStorage.getItem("token")
     });
    return this.http.post(`${this._apiLink}/comments` , {
       "content": content,
-      "user_id": userID,
       "post_id": postID
     } , {headers : h})
   }
+
 
 
     // ** USERS SECTION ** //
@@ -123,9 +128,23 @@ export class RestfulProvider {
       //catch the error
     });
   }
-  
+  getNotified(num){
+    let h = new HttpHeaders({
+      'Authorization' : 'Bearer ' + localStorage.getItem("token")
+    });
+   return this.http.get(`${this._apiLink}/notifications?page=${num}`  , {headers : h});
+  }
+  readNotifications(){
+    let h = new HttpHeaders({
+      'Authorization' : 'Bearer ' + localStorage.getItem("token")
+    });
+    return this.http.post(`${this._apiLink}/notifications` , {} , {headers :h }); 
+  }
   getUsers()
   {
-    return this.http.get(`${this._apiLink}/users`); 
+    let h = new HttpHeaders({
+      'Authorization' : 'Bearer ' + localStorage.getItem("token") 
+    });
+    return this.http.get(`${this._apiLink}/users` , {headers : h}); 
   }
 }
