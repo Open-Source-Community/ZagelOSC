@@ -41,9 +41,12 @@ export class PostsPage {
 
       platform.ready().then(_ =>{
         localnotifications.on("click").subscribe((d)=>{
+          if (d.id !=0){
           this.modalCtrl.create("CommentsPage" , {
             "postID" : d.id}).present();
-        });
+        }
+      }
+      );
         
       })
 
@@ -146,7 +149,7 @@ export class PostsPage {
 
       // });
       this.localnotifications.schedule([
-        { id: 1,  group : "email" , text : "idk"  },
+        { id: 0, title : "Ding Ding" , text : "New Post has been added"  },
 
     ]);
       
