@@ -8,7 +8,6 @@ import { Injectable } from '@angular/core';
 export class EmoteProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello EmoteProvider Provider');
   }
   emojiList = ["happy" , "coding" , "hai" , "cool"]; // continue adding posts
 
@@ -23,7 +22,7 @@ export class EmoteProvider {
     var temp= str; 
     for (var i=0; i<this.emojiList.length; i++)
     {
-      temp = this.replaceAll(temp , `--${this.emojiList[i]}--` ,  `<img src="assets/imgs/${this.emojiList[i]}.png" width="33px" height="27px">`);
+      temp = this.replaceAll(temp , `--${this.emojiList[i]}--` ,  `<img src="assets/imgs/${this.emojiList[i]}.png" >`);
     }
     return temp; 
   }

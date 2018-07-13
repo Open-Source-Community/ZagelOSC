@@ -31,14 +31,14 @@
           <img src="assets/imgs/osc.png">
         </ion-avatar>
         <h2 style="font-weight: bold; ">{{post.user.name}}</h2>
-        <p>{{post.created_at.date}}</p>
+        <p>{{fixDates(post.created_at.date)}}</p>
       </ion-item>
     
       <hr>
       <!-- <img src="assets/imgs/cam.jpg"> -->
     
       <ion-card-content>
-      <p [innerHTML]="post.content"></p>     
+      <pre dir="auto" [innerHTML]="post.content"></pre>     
  </ion-card-content>
     
       <ion-row>
@@ -51,7 +51,7 @@
         <ion-col>
           <button (click)="presentComments(post.id)" ion-button icon-left clear small>
             <ion-icon name="text"></ion-icon>
-            <div>Comments</div>
+            <div>{{addCommentsNumber(post)}} Comments</div>
           </button>
         </ion-col>
       </ion-row>
@@ -59,4 +59,8 @@
     </ion-card>
         </div>
 
+        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+          
 </ion-content>

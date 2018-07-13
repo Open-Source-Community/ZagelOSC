@@ -2,13 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
 import { LoginPage } from '../login/login';
+import { RestfulProvider } from '../../providers/restful/restful';
 
-/**
- * Generated class for the SplashPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -19,6 +15,7 @@ export class SplashPage {
 
   splash = true; 
   constructor(
+    public rest : RestfulProvider,
     public viewCtrl : ViewController,
     public navCtrl: NavController,
     public navParams: NavParams) {
@@ -27,10 +24,17 @@ export class SplashPage {
   ionViewDidLoad() {
     setTimeout(() => {
       this.splash = false;
+      
       if (localStorage.getItem("ID") && localStorage.getItem("token"))
       {
+       this.rest.getDetails(localStorage.getItem("token")).subscribe((d)=>{
         this.navCtrl.push("TabsPage"); 
         this.viewCtrl.dismiss(); 
+       } , (err) =>{
+         this.navCtrl.push(LoginPage); 
+         this.viewCtrl.dismiss(); 
+       })
+     
       }
       else{
         this.navCtrl.push(LoginPage); 

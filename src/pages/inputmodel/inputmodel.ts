@@ -30,7 +30,6 @@ export class InputmodelPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InputmodelPage');
   }
   ngAfterViewInit(){
   }

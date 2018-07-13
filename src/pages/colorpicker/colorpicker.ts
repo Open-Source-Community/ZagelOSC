@@ -17,7 +17,6 @@ export class ColorpickerPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ColorpickerPage');
   }
   setColor(color){
     this.viewCtrl.dismiss(color); 

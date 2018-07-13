@@ -45,5 +45,20 @@ ion-note {
 pre{
     font-size: 1em;
 }
-
+img {
+    width: 36px; 
+    height: 31px;
+}
+img[src*='coding']{
+    height: 30px; 
+    width: 55px;  
+}
+img[src*='hai']{
+    width: 25px;
+    height: 35px;
+}
+img[src*='cool']{
+    width: 25px; 
+    height: 35px; 
+}
 }

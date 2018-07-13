@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {User} from '../../models/User'; 
-import { ToastController, Header } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 // BIG NOTE..: there is a difference between functions that contains Sub at its end and other ones.
 // Sub ones sends back an observable to be subscribed on directly, the other ones sends back a Promise.
@@ -16,7 +16,6 @@ export class RestfulProvider {
   constructor(
      public toastCtrl : ToastController , 
      public http: HttpClient) {
-    console.log('Hello RestfulProvider Provider');
 
     this._DummieLink = "http://localhost:8100/api";
     this._apiLink = "http://zagel.oscgeeks.org/api"; 
@@ -57,7 +56,6 @@ export class RestfulProvider {
   }
   catch(err)
   {
-    console.log(err); 
   }
   }
   // adding a new post given a user id and a content.

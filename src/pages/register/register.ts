@@ -25,7 +25,6 @@ export class RegisterPage {
     }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
   }
 
 
@@ -45,7 +44,6 @@ export class RegisterPage {
         duration : 1000,
       }); 
       toast.present(); 
-      console.log(data); 
       this.rest.getDetails(localStorage.getItem("token")).subscribe(data =>{
         localStorage.setItem("ID" , data["success"]["id"]);
         localStorage.setItem("Name" , data["success"]["name"]);
@@ -62,7 +60,6 @@ export class RegisterPage {
         duration: 2500
       });
       toast.present(); 
-      console.log(err);
     });
   }
 

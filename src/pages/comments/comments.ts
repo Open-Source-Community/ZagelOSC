@@ -44,11 +44,9 @@ export class CommentsPage {
   }
   addComment()
   {
-    console.log(this.postID); 
     let modal = this.modalCtrl.create(InputmodelPage , {title : "Add Comment"});
     modal.present(); 
     modal.onDidDismiss((data)=>{
-      console.log(data); 
       this.rest.addComment(data , 
         localStorage.getItem("ID"), 
         this.postID).subscribe(_ => this.showComments()); 

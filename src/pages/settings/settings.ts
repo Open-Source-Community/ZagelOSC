@@ -36,7 +36,6 @@ export class SettingsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsPage');
   }
 
   changeColor()
@@ -127,7 +126,7 @@ export class SettingsPage {
       }
       checkVersion(){
         this.toastCtrl.create({
-          message : "Version number 1.0.0",
+          message : "Version number 1.1.0",
           duration : 1900,
         }).present(); 
       }

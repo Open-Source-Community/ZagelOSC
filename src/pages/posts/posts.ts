@@ -1,4 +1,4 @@
-import { Component, LOCALE_ID } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, ToastController ,IonicPage } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { Comment } from '../../models/Post';
@@ -8,6 +8,7 @@ import { InputmodelPage } from '../inputmodel/inputmodel';
 import { EmoteProvider } from '../../providers/emote/emote';
 
 import {LocalNotifications} from '@ionic-native/local-notifications'
+import { _ParseAST } from '@angular/compiler';
 
 
 @IonicPage()
@@ -21,8 +22,10 @@ export class PostsPage {
   _Comments : Comment[]; 
   numberTest:any; 
   _lastID : number; 
+  _firstID : number; 
   coloring : string; 
   _LocalID : string; 
+  _loaded : boolean; 
   showSpin = true; 
   constructor(
     public localnotifications : LocalNotifications,
@@ -33,8 +36,9 @@ export class PostsPage {
     public navCtrl: NavController,
     public modalCtrl: ModalController) {
 
+      this._loaded = true; 
+
       this._LocalID = localStorage.getItem("ID"); 
-      console.log("Local ID" , this._LocalID); 
 
       if (localStorage.getItem("Color")){
         this.coloring= localStorage.getItem("Color"); 
@@ -56,11 +60,10 @@ export class PostsPage {
         var size = Object.keys(this._Posts).length; 
         for (var i=0; i<size; i++)
         {
-          this._Posts[i]["created_at"]["date"]=
-          this._Posts[i]["created_at"]["date"].split(".")[0]; 
           this._Posts[i]["content"] = emote.addEmotes(this._Posts[i]["content"]); 
         }
         this._lastID = this._Posts[0].id; 
+        this._firstID = this._Posts[this._Posts.length-1].id; 
         this.showSpin = false; 
       })
 
@@ -69,13 +72,19 @@ export class PostsPage {
   ionViewDidEnter(){
     if (localStorage.getItem("Color"))
     this.coloring = localStorage.getItem("Color"); 
+
+    // if (this._loaded == false){
+    // this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    // }
+    // else{
+    //   this._loaded = false; 
+    // }
     }
 
       // creating a model when a post is clicked by sending to that modal the comments to be displayed.
   presentComments(id)
   {
     // here i make another http get cause its not implemented yet to retrieve the comments given the post ID.
-    console.log("id sent to comments page" , id); 
     this.modalCtrl.create("CommentsPage" , {
     "postID" : id}).present();
   }
@@ -108,7 +117,6 @@ export class PostsPage {
 
         this.toastCtrl.create({message: "Comment added" , duration: 800}).present(); 
       }); 
-      console.log(comment); 
     })
   }
   Refresher()
@@ -117,10 +125,12 @@ export class PostsPage {
 
       // notify when a post is added and the userID is not equal to the logged one now, add an if condition here
       //** CODE THE CONDITION **//
+      if (post["data"]["user"]["id"] != localStorage.getItem("ID")){
       this.localnotifications.schedule({
         id: 1,
         text: 'A new Post has been added:)',
       });
+    }
       
       post["data"]["content"] = this.emote.addEmotes(post["data"]["content"]); 
       this._Posts.unshift(post["data"]); 
@@ -133,12 +143,36 @@ export class PostsPage {
   // a manual refresher by the user.
   doRefresh(refresher) {
 
-    console.log('Begin async operation', refresher);
 
     setTimeout(() => {
-      console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
+  }
+  doInfinite(infiniteScroll){
+    setTimeout(() => {
+      for(var i=1; i<=5; i++){
+        this.rest.getPostSub(this._firstID-i).subscribe((post)=>{
+          post["data"]["content"]= this.emote.addEmotes(post["data"]["content"]);
+          this._firstID--; 
+          this._Posts.push(post["data"]);
+        } , (err => {
+          i =7; 
+          if (err["status"] == 429 || err["status"] == "429"){
+          }
+          else
+          this.toastCtrl.create({message : "No more to show" , duration : 2000}).present(); 
+        }))
+      }
+      infiniteScroll.complete();
+    }, 500);
+  }
 
+  fixDates(str){
+    const date = str.split('.')[0];
+    
+    return date;  
+  }
+  addCommentsNumber(post){
+    return  Object.keys(post["comments"]).length;
   }
 }

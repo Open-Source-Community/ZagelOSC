@@ -14,15 +14,8 @@
 
     <button ion-item (click)="changeColor()">
       
-      <ion-icon color="primary" name='color-fill' item-start></ion-icon>
+      <ion-icon [ngStyle]="{'color': coloring}" name='color-fill' item-start></ion-icon>
       Change Color
-    </button>
-
-    <button ion-item (click)="logout()">
-      <ion-icon name="exit" item-start></ion-icon>
-      <ion-label>
-        Log Out 
-      </ion-label>
     </button>
 
     <button ion-item (click)="performManualUpdate()">
@@ -34,11 +27,18 @@
       </button>
 
     <button ion-item (click)="checkVersion()">
-        <ion-icon item-start name="information-circle-outline"></ion-icon>
+        <ion-icon item-start name="information-circle"></ion-icon>
         <ion-label>
           Check Application Version  
         </ion-label>
       </button>
+
+      <button ion-item (click)="logout()">
+          <ion-icon name="exit" item-start></ion-icon>
+          <ion-label>
+            Log Out 
+          </ion-label>
+        </button>
     <!-- <button ion-item>
         <ion-toggle checked="false"></ion-toggle>
       <ion-icon name='flask' item-start></ion-icon>

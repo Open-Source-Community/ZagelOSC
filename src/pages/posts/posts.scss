@@ -10,9 +10,21 @@ page-posts {
 		background-color: black !important;
     }
     img{
-        width: 30px; 
-        height: 30px;
+        width: 36px; 
+        height: 31px;
         display: inline-block;
+    }
+    img[src*='coding']{
+        height: 30px; 
+        width: 55px;  
+    }
+    img[src*='hai']{
+        width: 25px;
+        height: 35px;
+    }
+    img[src*='cool']{
+        width: 25px; 
+        height: 35px; 
     }
     ion-spinner {
         width: 50px;

@@ -1,6 +1,13 @@
  
   <ion-content  [ngStyle]="{'background-color': coloring}" padding>
 
+    <div style="padding: 6px; " >
+    <h1>Our Users Base
+      <img src="assets/imgs/happy.png" width="50px" height="50px">
+      <img src="assets/imgs/hai.png" width="40px" height="60px">    
+      <img src="assets/imgs/coding.png" width="60px" height="45px">
+    </h1>
+  </div>
     <ion-list>
       <ion-item *ngFor="let user of DisplayNames">{{user.name}}</ion-item>
     </ion-list>

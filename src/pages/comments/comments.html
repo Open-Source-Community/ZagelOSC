@@ -47,7 +47,7 @@
       <img src="https://openclipart.org/download/57877/penguin.svg">
     </ion-avatar>
     <h2 style="font-size: 0.9em ; font-weight: bolder;">{{comment.user.name}}</h2>
-    <pre [innerHTML]="comment.content"></pre>
+    <pre dir="auto" [innerHTML]="comment.content"></pre>
     <ion-note >{{fixDates(comment.created_at.date)}}</ion-note>
   </ion-item>
 </div>
