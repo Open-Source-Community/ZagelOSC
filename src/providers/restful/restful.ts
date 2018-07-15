@@ -19,7 +19,7 @@ export class RestfulProvider {
 
     this._DummieLink = "http://localhost:8100/api";
     this._apiLink = "http://zagel.oscgeeks.org/api"; 
-    // this._apiLink = this._DummieLink ; // for now, change it in the production line    
+    this._apiLink = this._DummieLink ; // for now, change it in the production line    
   }
 
 

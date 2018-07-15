@@ -37,12 +37,15 @@ export class ContactPage {
 
   doInfinite(infiniteScroll){
     setTimeout(() => {
-      let tempCount = this.currentLen; 
-      if (this.currentLen+5 < this.maxLen){
-      for (var i=tempCount; i<(tempCount+5) ; i++)
+      if (this.currentLen < this.maxLen){
+      for (var i=this.currentLen; i<(this.currentLen+5) ; i++)
       {
+        
         this.DisplayNames.push(this._allNames[i]); 
         this.currentLen++; 
+        if(this.currentLen>=this.maxLen){
+          break; 
+        }
       }
     }
     else{

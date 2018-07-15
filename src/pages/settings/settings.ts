@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, App, ToastController, AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import {Pro} from '@ionic/pro';
-/**
- * Generated class for the SettingsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -69,40 +64,45 @@ export class SettingsPage {
         but Redirect when they logout for an app that is always running
         but used with multiple users (like at a doctors office).
     */
-   try {
-    const haveUpdate = await Pro.deploy.check();
+  //  try {
+  //   const haveUpdate = await Pro.deploy.check();
 
-    if (haveUpdate){
-   let alert = this.alertCtrl.create({
-    title: 'Confirm Update',
-    message: 'there is a new update, wanna go forward?',
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        handler: () => {
-        }
-      },
-      {
-        text: 'Update',
-        handler: () => {
-          this.manualUpdate(); 
-        }
-      }
-    ]
-  });
-  alert.present();
-    }
-    else {
-      this.toastCtrl.create({
-        message: "No updates found bud", 
-        duration: 2000 ,
-      }).present(); 
-    }
-  }
-  catch(err){
+  //   if (haveUpdate){
+  //  let alert = this.alertCtrl.create({
+  //   title: 'Confirm Update',
+  //   message: 'there is a new update, wanna go forward?',
+  //   buttons: [
+  //     {
+  //       text: 'Cancel',
+  //       role: 'cancel',
+  //       handler: () => {
+  //       }
+  //     },
+  //     {
+  //       text: 'Update',
+  //       handler: () => {
+  //         // this.manualUpdate(); 
+  //         this.toastCtrl.create({
+  //           message : "Updates will be available for a later version.",
+  //           duration : 2000
+  //         }).present();
+  //       }
+  //     }
+  //   ]
+  // });
+  // alert.present();
+  //   }
+  //   else {
+  //     this.toastCtrl.create({
+  //       message: "No updates found bud", 
+  //       duration: 2000 ,
+  //     }).present(); 
+  //   }
+  // }
+  // catch(err){
 
-  }
+  // }
+  this.toastCtrl.create({message: "Right now updates are turned off, will be back soon" , duration : 2000}).present(); 
   }
 
   async manualUpdate(){
@@ -126,7 +126,7 @@ export class SettingsPage {
       }
       checkVersion(){
         this.toastCtrl.create({
-          message : "Version number 1.1.0",
+          message : "Version number 1.0.0",
           duration : 1900,
         }).present(); 
       }

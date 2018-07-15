@@ -39,16 +39,16 @@ export class PostsPage {
     public navCtrl: NavController,
     public modalCtrl: ModalController) {
 
-      platform.ready().then(_ =>{
-        localnotifications.on("click").subscribe((d)=>{
-          if (d.id !=0){
-          this.modalCtrl.create("CommentsPage" , {
-            "postID" : d.id}).present();
-        }
-      }
-      );
+      // platform.ready().then(_ =>{
+      //   localnotifications.on("click").subscribe((d)=>{
+      //     if (d.id !=0){
+      //     this.modalCtrl.create("CommentsPage" , {
+      //       "postID" : d.id}).present();
+      //   }
+      // }
+      // );
         
-      })
+      // })
 
       this._loaded = true; 
 
