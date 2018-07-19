@@ -20,6 +20,9 @@ import { EmoteProvider } from '../providers/emote/emote';
 import {LocalNotifications} from '@ionic-native/local-notifications'
 import { LoginPage } from '../pages/login/login';
 
+import { HeaderColor  } from '@ionic-native/header-color';
+
+
 Pro.init('6C12FFFB', {
   appVersion: '0.0.1'
 })
@@ -71,7 +74,8 @@ export class MyErrorHandler implements ErrorHandler {
     [{ provide: ErrorHandler, useClass: MyErrorHandler }],
     RestfulProvider,
     EmoteProvider,
-    LocalNotifications
+    LocalNotifications,
+    HeaderColor,
   ]
 })
 export class AppModule {}

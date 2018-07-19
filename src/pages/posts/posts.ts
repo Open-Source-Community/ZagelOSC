@@ -9,6 +9,7 @@ import { EmoteProvider } from '../../providers/emote/emote';
 
 import {LocalNotifications} from '@ionic-native/local-notifications'
 import { Platform } from 'ionic-angular/platform/platform';
+import { HeaderColor } from '@ionic-native/header-color';
 
 
 @IonicPage()
@@ -30,6 +31,7 @@ export class PostsPage {
   _postsPageNum=2; // as we ask for 1 at the start.
   showSpin = true; 
   constructor(
+    public headerCol : HeaderColor,
     public platform : Platform,
     public localnotifications : LocalNotifications,
     public emote : EmoteProvider, 
@@ -38,6 +40,8 @@ export class PostsPage {
     public rest : RestfulProvider, 
     public navCtrl: NavController,
     public modalCtrl: ModalController) {
+
+      headerCol.tint("rgb(100,12,50"); 
 
       // platform.ready().then(_ =>{
       //   localnotifications.on("click").subscribe((d)=>{

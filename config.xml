@@ -96,4 +96,5 @@
         <variable name="UPDATE_API" value="https://api.ionicjs.com" />
     </plugin>
     <engine name="android" spec="7.0.0" />
+    <plugin name="cordova-plugin-headercolor" spec="^1.0.0" />
 </widget>
