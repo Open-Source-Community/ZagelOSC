@@ -10,6 +10,8 @@ import { EmoteProvider } from '../../providers/emote/emote';
 import {LocalNotifications} from '@ionic-native/local-notifications'
 import { Platform } from 'ionic-angular/platform/platform';
 import { HeaderColor } from '@ionic-native/header-color';
+import { ActionSheetController } from 'ionic-angular'
+
 
 
 @IonicPage()
@@ -31,6 +33,7 @@ export class PostsPage {
   _postsPageNum=2; // as we ask for 1 at the start.
   showSpin = true; 
   constructor(
+    public actionCtrl : ActionSheetController,
     public headerCol : HeaderColor,
     public platform : Platform,
     public localnotifications : LocalNotifications,
@@ -249,5 +252,37 @@ this.rest.getNotified(this._pageNum).subscribe((data) =>{
   this.rest.readNotifications().subscribe((d)=>{ }); 
 })
     
+  }
+
+
+  presentActionSheet() {
+    
+    let actionSheet = this.actionCtrl.create({
+      title: 'Modify your album',
+      buttons: [
+        {
+          text: 'Destructive',
+          role: 'destructive',
+          handler: () => {
+            console.log('Destructive clicked');
+          }
+        },
+        {
+          text: 'Archive',
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+ 
+    actionSheet.present();
   }
 }

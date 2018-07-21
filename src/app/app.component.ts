@@ -26,3 +26,10 @@ export class MyApp {
     });
   }
 }
+
+// TODO:
+/*
+- Fix comments look and add a button below to add a comment directly through a box.
+- Make clicking an emoji do not hide the keyboard
+- Make comments / posts editable by the user. 
+ */

@@ -27,7 +27,7 @@ export class SplashPage {
       
       if (localStorage.getItem("ID") && localStorage.getItem("token"))
       {
-        this.navCtrl.push("TabsPage"); 
+        this.navCtrl.push("TestPage"); 
         this.viewCtrl.dismiss(); 
       }
       else{
